@@ -1,0 +1,123 @@
+/* First Section
+--------------------------------------------- */
+
+.weatherWeekly {
+    @include size(65vw, 100vh);
+    padding: 2%;
+
+    .dailyInfo {
+        display: flex;
+        flex-direction: column;
+
+        .currentlyTime {
+            font-size: 10em;
+        }
+
+        .currentlyDate {
+            font-size: 5em;
+        }
+
+        .helloDay {
+            font-size: 8em;
+        }
+
+        .currentlyTime,
+        .helloDay {
+            color: $colorPrimary;
+        }
+    }
+
+    .weeklyInfo {
+        display: grid;
+        grid: auto-flow / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 25px;
+        justify-content: space-between;
+
+        .daysWeather {
+            @include size(auto,250px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            background-color: $colorBg2;
+            border-radius: 23px;
+            box-shadow:  8px 0px 30px #c7c7c7;
+        }
+    }
+
+}
+
+.weatherDaily {
+    @include size(35vw, 100vh);
+    padding: 2%;
+    background-color: $colorBg2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .tempDaily {
+        @include size(100%, 65vh);
+        color: $colorBg2;
+        margin: 5%;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: $colorPrimary;
+        border-radius: 20px;
+
+        img {
+            @include size(60%, auto);
+            
+        }
+
+        .localisation,
+        .weather {
+            font-size: 6em;
+        }
+
+        .currentTemp {
+            font-size: 22em
+        }
+
+        .weather {
+            margin-bottom: 0px;
+        }
+
+    }
+    
+    .infosDaily {
+        @include size(100%, 20vh);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $colorSecondary;
+        border-radius: 20px;
+
+        .blocTime {
+            width: 100%;
+            color: $colorBg2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 4em;
+
+            .timeName {
+                margin-bottom: 5px;
+            }
+
+            .timeValue {
+                margin-top: 5px;
+            }
+        }
+
+        .verticaLine{
+            border-left: 2px solid $colorBg2;
+            display: inline-block;
+            height: 130px;
+        }
+    }
+}

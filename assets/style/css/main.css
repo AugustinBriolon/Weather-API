@@ -1,0 +1,176 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+
+# Abstract
+	- Mixins
+	-Variables
+
+# Base
+	- Typography
+	- Elements
+
+# Components
+	- Button
+
+# Layouts
+
+# Main.scss
+
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Abstract
+--------------------------------------------------------------*/
+/* Colors
+--------------------------------------------- */
+/* Typography
+--------------------------------------------- */
+/*--------------------------------------------------------------
+# Base
+--------------------------------------------------------------*/
+/* Elements
+--------------------------------------------- */
+/* Body
+--------------------------------------------- */
+body {
+  background: #F0F5FF;
+  font-family: "Dongle", sans-serif;
+  /* base de "10px" au lieu de "16px" */
+  font-size: 62.5%;
+  display: flex;
+  flex-direction: row;
+}
+
+/* Inherit box-sizing to more easily change it's value on a component level. */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+/*--------------------------------------------------------------
+# Components
+--------------------------------------------------------------*/
+/* Button
+--------------------------------------------- */
+/* Button
+--------------------------------------------- */
+/*--------------------------------------------------------------
+# Layouts
+--------------------------------------------------------------*/
+/* First Section
+--------------------------------------------- */
+.weatherWeekly {
+  width: 65vw;
+  height: 100vh;
+  padding: 2%;
+}
+.weatherWeekly .dailyInfo {
+  display: flex;
+  flex-direction: column;
+}
+.weatherWeekly .dailyInfo .currentlyTime {
+  font-size: 10em;
+}
+.weatherWeekly .dailyInfo .currentlyDate {
+  font-size: 5em;
+}
+.weatherWeekly .dailyInfo .helloDay {
+  font-size: 8em;
+}
+.weatherWeekly .dailyInfo .currentlyTime,
+.weatherWeekly .dailyInfo .helloDay {
+  color: #6A9DFF;
+}
+.weatherWeekly .weeklyInfo {
+  display: grid;
+  grid: auto-flow/1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 25px;
+  justify-content: space-between;
+}
+.weatherWeekly .weeklyInfo .daysWeather {
+  width: auto;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 4em;
+  background-color: #FFFF;
+  border-radius: 23px;
+  box-shadow: 8px 0px 30px #c7c7c7;
+}
+
+.weatherDaily {
+  width: 35vw;
+  height: 100vh;
+  padding: 2%;
+  background-color: #FFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weatherDaily .tempDaily {
+  width: 100%;
+  height: 65vh;
+  color: #FFFF;
+  margin: 5%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #6A9DFF;
+  border-radius: 20px;
+}
+.weatherDaily .tempDaily img {
+  width: 60%;
+  height: auto;
+}
+.weatherDaily .tempDaily .localisation,
+.weatherDaily .tempDaily .weather {
+  font-size: 6em;
+}
+.weatherDaily .tempDaily .currentTemp {
+  font-size: 22em;
+}
+.weatherDaily .tempDaily .weather {
+  margin-bottom: 0px;
+}
+.weatherDaily .infosDaily {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fcb2ad;
+  border-radius: 20px;
+}
+.weatherDaily .infosDaily .blocTime {
+  width: 100%;
+  color: #FFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 4em;
+}
+.weatherDaily .infosDaily .blocTime .timeName {
+  margin-bottom: 5px;
+}
+.weatherDaily .infosDaily .blocTime .timeValue {
+  margin-top: 5px;
+}
+.weatherDaily .infosDaily .verticaLine {
+  border-left: 2px solid #FFFF;
+  display: inline-block;
+  height: 130px;
+}
+
+/*# sourceMappingURL=main.css.map */

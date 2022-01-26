@@ -1,0 +1,13 @@
+/* Inherit box-sizing to more easily change it's value on a component level. */
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	box-sizing: border-box;
+}

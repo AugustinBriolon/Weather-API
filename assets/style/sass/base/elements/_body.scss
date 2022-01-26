@@ -1,0 +1,11 @@
+/* Body
+--------------------------------------------- */
+
+body {
+	background: $colorBg;
+	font-family: $typo;
+	/* base de "10px" au lieu de "16px" */
+	font-size: 62.5%; 
+	display: flex;
+	flex-direction: row;
+}
