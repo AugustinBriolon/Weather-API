@@ -37,8 +37,6 @@ body {
   font-family: "Dongle", sans-serif;
   /* base de "10px" au lieu de "16px" */
   font-size: 62.5%;
-  display: flex;
-  flex-direction: row;
 }
 
 /* Inherit box-sizing to more easily change it's value on a component level. */
@@ -66,33 +64,80 @@ html {
 --------------------------------------------------------------*/
 /* First Section
 --------------------------------------------- */
+header {
+  width: 65vw;
+  display: block;
+  padding: 2%;
+}
+@media screen and (max-width: 500px) {
+  header {
+    width: 100%;
+  }
+}
+header .dailyInfo {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 500px) {
+  header .dailyInfo {
+    align-items: center;
+  }
+}
+header .dailyInfo .currentlyTime {
+  font-size: calc(50px + 4vw);
+}
+header .dailyInfo .currentlyDate {
+  font-size: calc(30px + 1.5vw);
+}
+header .dailyInfo .helloDay {
+  font-size: calc(35px + 3vw);
+}
+header .dailyInfo .currentlyTime,
+header .dailyInfo .helloDay {
+  color: #6A9DFF;
+}
+
+.containerP {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 1000px) {
+  .containerP {
+    flex-direction: column-reverse;
+  }
+}
+
 .weatherWeekly {
   width: 65vw;
   height: 100vh;
   padding: 2%;
 }
-.weatherWeekly .dailyInfo {
-  display: flex;
-  flex-direction: column;
-}
-.weatherWeekly .dailyInfo .currentlyTime {
-  font-size: 10em;
-}
-.weatherWeekly .dailyInfo .currentlyDate {
-  font-size: 5em;
-}
-.weatherWeekly .dailyInfo .helloDay {
-  font-size: 8em;
-}
-.weatherWeekly .dailyInfo .currentlyTime,
-.weatherWeekly .dailyInfo .helloDay {
-  color: #6A9DFF;
+@media screen and (max-width: 1000px) {
+  .weatherWeekly {
+    width: 100vw;
+    height: fit-content;
+  }
 }
 .weatherWeekly .weeklyInfo {
   display: grid;
   grid: auto-flow/1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 25px;
+  grid-gap: 10px;
   justify-content: space-between;
+}
+@media screen and (max-width: 1600px) {
+  .weatherWeekly .weeklyInfo {
+    grid: auto-flow/1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 800px) {
+  .weatherWeekly .weeklyInfo {
+    grid: auto-flow/1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 500px) {
+  .weatherWeekly .weeklyInfo {
+    grid: auto-flow/1fr 1fr;
+  }
 }
 .weatherWeekly .weeklyInfo .daysWeather {
   width: auto;
@@ -101,33 +146,127 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 4em;
+  font-size: calc(30px + 1.5vw);
   background-color: #FFFF;
   border-radius: 23px;
   box-shadow: 8px 0px 30px #c7c7c7;
 }
+@media screen and (max-width: 500px) {
+  .weatherWeekly .weeklyInfo .daysWeather {
+    box-shadow: none;
+  }
+}
+.weatherWeekly .extraInfo {
+  width: 65vw;
+  height: 100%;
+  margin-top: 20px;
+}
+@media screen and (max-width: 500px) {
+  .weatherWeekly .extraInfo {
+    width: 100%;
+    height: 100%;
+  }
+}
+.weatherWeekly .extraInfo .airQuality {
+  width: 30vw;
+  height: 40%;
+  background-color: #FFFF;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+@media screen and (max-width: 500px) {
+  .weatherWeekly .extraInfo .airQuality {
+    width: 100%;
+    height: 40%;
+  }
+}
+.weatherWeekly .extraInfo .airQuality h3 {
+  font-size: calc(35px + 3vw);
+}
+.weatherWeekly .extraInfo .airQuality .aqiusContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  color: #3ABD89;
+  font-size: calc(30px + 1.5vw);
+}
+.weatherWeekly .extraInfo .airQuality .aqiusContainer .aqius {
+  padding-left: 20%;
+}
+.weatherWeekly .extraInfo .infosContainer {
+  display: flex;
+  flex-direction: row;
+}
+.weatherWeekly .extraInfo .infosContainer .atomContainer,
+.weatherWeekly .extraInfo .infosContainer .windContainer,
+.weatherWeekly .extraInfo .infosContainer .windDirectionContainer {
+  width: 18%;
+  height: fit-content;
+  background-color: #BBF8D9;
+  color: #3ABD89;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.weatherWeekly .extraInfo .infosContainer .atomContainer .atmos,
+.weatherWeekly .extraInfo .infosContainer .atomContainer .wind,
+.weatherWeekly .extraInfo .infosContainer .atomContainer .windDirection,
+.weatherWeekly .extraInfo .infosContainer .windContainer .atmos,
+.weatherWeekly .extraInfo .infosContainer .windContainer .wind,
+.weatherWeekly .extraInfo .infosContainer .windContainer .windDirection,
+.weatherWeekly .extraInfo .infosContainer .windDirectionContainer .atmos,
+.weatherWeekly .extraInfo .infosContainer .windDirectionContainer .wind,
+.weatherWeekly .extraInfo .infosContainer .windDirectionContainer .windDirection {
+  font-size: calc(30px + 1.5vw);
+}
+.weatherWeekly .extraInfo .infosContainer .atomContainer .infoUnit,
+.weatherWeekly .extraInfo .infosContainer .windContainer .infoUnit,
+.weatherWeekly .extraInfo .infosContainer .windDirectionContainer .infoUnit {
+  font-size: calc(20px + 1vw);
+  font-weight: 300;
+}
+.weatherWeekly .extraInfo .infosContainer .windContainer,
+.weatherWeekly .extraInfo .infosContainer .windDirectionContainer {
+  margin-left: 35px;
+}
 
 .weatherDaily {
   width: 35vw;
-  height: 100vh;
+  height: 100%;
   padding: 2%;
   background-color: #FFFF;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+@media screen and (max-width: 1000px) {
+  .weatherDaily {
+    width: 100vw;
+    height: fit-content;
+    background-color: #F0F5FF;
+  }
+}
 .weatherDaily .tempDaily {
   width: 100%;
-  height: 65vh;
+  height: fit-content;
   color: #FFFF;
   margin: 5%;
   padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
   align-items: center;
   background: #6A9DFF;
   border-radius: 20px;
+}
+@media screen and (max-width: 500px) {
+  .weatherDaily .tempDaily {
+    padding: 0;
+  }
 }
 .weatherDaily .tempDaily img {
   width: 60%;
@@ -135,13 +274,18 @@ html {
 }
 .weatherDaily .tempDaily .localisation,
 .weatherDaily .tempDaily .weather {
-  font-size: 6em;
+  font-size: calc(20px + 3vw);
 }
 .weatherDaily .tempDaily .currentTemp {
   font-size: 22em;
 }
 .weatherDaily .tempDaily .weather {
   margin-bottom: 0px;
+}
+@media screen and (max-width: 500px) {
+  .weatherDaily .tempDaily .weather {
+    padding-bottom: 30px;
+  }
 }
 .weatherDaily .infosDaily {
   width: 100%;
@@ -159,7 +303,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 4em;
+  font-size: calc(30px + 1.5vw);
 }
 .weatherDaily .infosDaily .blocTime .timeName {
   margin-bottom: 5px;
@@ -170,7 +314,7 @@ html {
 .weatherDaily .infosDaily .verticaLine {
   border-left: 2px solid #FFFF;
   display: inline-block;
-  height: 130px;
+  height: calc(100px + 4vh);
 }
 
 /*# sourceMappingURL=main.css.map */

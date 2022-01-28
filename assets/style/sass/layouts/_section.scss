@@ -1,72 +1,183 @@
 /* First Section
 --------------------------------------------- */
-
-.weatherWeekly {
-    @include size(65vw, 100vh);
+header {
+    width: 65vw;
+    display: block;
     padding: 2%;
-
+    @media screen and (max-width : 500px) {
+        width: 100%;
+    }
+    
     .dailyInfo {
         display: flex;
         flex-direction: column;
-
+        @media screen and (max-width : 500px) {
+            align-items: center;
+        }
+        
         .currentlyTime {
-            font-size: 10em;
+            font-size: $fontHead1;
         }
-
+        
         .currentlyDate {
-            font-size: 5em;
+            font-size: $fontText;
         }
-
+        
         .helloDay {
-            font-size: 8em;
+            font-size: $fontHead2;
         }
-
+        
         .currentlyTime,
         .helloDay {
             color: $colorPrimary;
         }
     }
+}
+
+.containerP {
+    display: flex;
+    flex-direction: row;
+    @media screen and (max-width : 1000px) {
+        flex-direction: column-reverse;
+    }
+}
+
+.weatherWeekly {
+    @include size(65vw, 100vh);
+    padding: 2%;
+    @media screen and (max-width : 1000px) {
+        @include size(100vw, fit-content);
+    }
 
     .weeklyInfo {
         display: grid;
         grid: auto-flow / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 25px;
+        grid-gap: 10px;
         justify-content: space-between;
+        @media screen and (max-width : 1600px) {
+            grid: auto-flow / 1fr 1fr 1fr 1fr;
+        }
+        @media screen and (max-width : 800px) {
+            grid: auto-flow / 1fr 1fr 1fr;
+        }
+        @media screen and (max-width : 500px) {
+            grid: auto-flow / 1fr 1fr;
+        }
+
+
 
         .daysWeather {
-            @include size(auto,250px);
+            @include size(auto, 250px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 4em;
+            font-size: $fontText;
             background-color: $colorBg2;
             border-radius: 23px;
             box-shadow:  8px 0px 30px #c7c7c7;
+            @media screen and (max-width : 500px) {
+                box-shadow: none;
+            }
         }
     }
 
+    .extraInfo {
+        @include size(65vw, 100%);
+        margin-top: 20px;
+        @media screen and (max-width : 500px) {
+            @include size(100%, 100%);
+        }
+
+        .airQuality {
+            @include size(30vw, 40%);
+            background-color: $colorBg2;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            @media screen and (max-width : 500px) {
+                @include size(100%, 40%);
+            }
+
+            h3 {
+                font-size: $fontHead2;
+            }
+
+            .aqiusContainer {
+                @include size(100%, fit-content);
+                display: flex;
+                color: $colorAir;
+                font-size: $fontText;
+
+                .aqius {
+                    padding-left: 20%;
+                }
+            }
+        }
+
+        .infosContainer {
+            display: flex;
+            flex-direction: row;
+
+            .atomContainer,
+            .windContainer,
+            .windDirectionContainer {
+                @include size(18%, fit-content);
+                background-color: $colorAirDiv;
+                color: $colorAir;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+
+                .atmos,
+                .wind,
+                .windDirection {
+                    font-size: $fontText;
+                }
+
+                .infoUnit {
+                    font-size: $fontText2;
+                    font-weight: 300;
+                }
+            }
+
+            .windContainer,
+            .windDirectionContainer {
+                margin-left: 35px;
+            }
+        }
+    }
 }
 
 .weatherDaily {
-    @include size(35vw, 100vh);
+    @include size(35vw, 100%);
     padding: 2%;
     background-color: $colorBg2;
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and (max-width : 1000px) {
+        @include size(100vw, fit-content);
+        background-color: $colorBg;
+    }
 
     .tempDaily {
-        @include size(100%, 65vh);
+        @include size(100%, fit-content);
         color: $colorBg2;
         margin: 5%;
         padding: 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
         align-items: center;
         background: $colorPrimary;
         border-radius: 20px;
+        @media screen and (max-width : 500px) {
+            padding: 0;
+        }
 
         img {
             @include size(60%, auto);
@@ -75,15 +186,18 @@
 
         .localisation,
         .weather {
-            font-size: 6em;
+            font-size: $fontTitle;
         }
 
         .currentTemp {
-            font-size: 22em
+            font-size: 22em;
         }
 
         .weather {
             margin-bottom: 0px;
+            @media screen and (max-width : 500px) {
+                padding-bottom: 30px;
+            }
         }
 
     }
@@ -103,7 +217,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 4em;
+            font-size: $fontText;
 
             .timeName {
                 margin-bottom: 5px;
@@ -117,7 +231,7 @@
         .verticaLine{
             border-left: 2px solid $colorBg2;
             display: inline-block;
-            height: 130px;
+            height: calc(100px + 4vh);
         }
     }
 }

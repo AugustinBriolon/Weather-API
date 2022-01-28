@@ -1,5 +1,7 @@
-const CLEFAPI = '8e9391f167c17b3253b145b2a036ffd4';
+const ApiKey = '8e9391f167c17b3253b145b2a036ffd4';
+const ApiKey2 = '87f51655-9722-4c30-ad92-4c0b5b08f29e'
 let resultatsAPI;
+let formattedTime
 
 const weather = document.querySelector('.weather');
 const currentTemp = document.querySelector('.currentTemp');
@@ -10,27 +12,56 @@ const time = document.querySelectorAll('.timeName');
 const tempPourH = document.querySelectorAll('.timeValue');
 
 const humiJoursDiv = document.querySelectorAll('.jour-prevision-himi');
-const leveJoursDiv = document.querySelectorAll('.jour-soleil-leve');
-const coucheJoursDiv = document.querySelectorAll('.jour-soleil-couche');
+const leveJoursDiv = document.querySelectorAll('.leveJoursDiv');
+const coucheJoursDiv = document.querySelectorAll('.coucheJoursDiv');
 const weatherLogo = document.querySelector('.weatherLogo');
 
 
-if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
+const aqiusCommentToInsert = document.querySelector('.aqiusComment')
+const aqiusToInsert = document.querySelector('.aqius')
+const atmosToInsert = document.querySelector('.atmos')
+const windToInsert = document.querySelector('.wind')
+const windDirectionToInsert = document.querySelector('.windDirection')
 
-        // console.log(position);
-        let long = position.coords.longitude;
-        let lat = position.coords.latitude;
-        AppelAPI(long,lat);
 
-    }, () => {
-        alert(`You refused geolocation, the application cannot work, please activate it.`)
-    })
+const daysWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+
+
+function convertUnix(unix) {
+    let unix_timestamp = unix
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    var date = new Date(unix_timestamp * 1000);
+    // Hours part from the timestamp
+    var hours = date.getHours();
+    // Minutes part from the timestamp
+    var minutes = "0" + date.getMinutes();
+
+    // Will display time in 10:30:23 format
+    formattedTime = hours + ':' + minutes.substr(-2);
+
+}
+function getAqius(aqius) {
+    aqiusToInsert.innerText = aqius
+    if (aqius >= 0 && aqius <= 50) {
+        aqiusCommentToInsert.innerText = 'Good'
+    } else if (aqius > 50 && aqius <= 100) {
+        aqiusCommentToInsert.innerText = 'Moderate'
+    } else if (aqius > 100 && aqius <= 150) {
+        aqiusCommentToInsert.innerText = 'Bad for sensitive group'
+    } else if (aqius > 150 && aqius <= 200) {
+        aqiusCommentToInsert.innerText = 'Bad'
+    } else if (aqius > 200 && aqius <= 300) {
+        aqiusCommentToInsert.innerText = 'Very bad'
+    } else if (aqius > 300) {
+        aqiusCommentToInsert.innerText = 'Dangerous'
+    }
 }
 
 function AppelAPI(long, lat) {
 
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&units=imperial&appid=${CLEFAPI}`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&units=imperial&appid=${ApiKey}`)
     .then((reponse) => {
         return reponse.json();
     })
@@ -67,8 +98,8 @@ function AppelAPI(long, lat) {
         }
 
         // Trois premieres lettres des jours 
-        for(let k = 0; k < tabJoursEnOrdre.length; k++) {
-            joursDiv[k].innerText = tabJoursEnOrdre[k].slice(0,3);
+        for(let k = 0; k < getDays().length; k++) {
+            joursDiv[k].innerText = getDays()[k].slice(0,3);
         }
 
         // Weather for each day
@@ -76,38 +107,16 @@ function AppelAPI(long, lat) {
             tempJoursDiv[m].innerText = `${Math.floor(resultatsAPI.daily[m + 1].temp.day)}°F`
         }
 
+        for(let l = 0; l < 7; l++){
+            convertUnix(resultatsAPI.daily[l + 1].sunrise)
+            leveJoursDiv[l].innerText = formattedTime
+        }
+        for(let l = 0; l < 7; l++){
+            convertUnix(resultatsAPI.daily[l + 1].sunset)
+            coucheJoursDiv[l].innerText = formattedTime
+        }
 
-        // // Levé soleil par jour
-        // for(let l = 0; l < 7; l++){
-        //     let unix_timestamp = resultatsAPI.daily[l + 1].sunrise
-        //     // Create a new JavaScript Date object based on the timestamp
-        //     // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-        //     var date = new Date(unix_timestamp * 1000);
-        //     // Hours part from the timestamp
-        //     var hours = date.getHours();
-        //     // Minutes part from the timestamp
-        //     var minutes = "0" + date.getMinutes();
-    
-        //     // Will display time in 10:30:23 format
-        //     var formattedTime = hours + ':' + minutes.substr(-2);
-        //     leveJoursDiv[l].innerText = formattedTime
-        // }
-
-        // // Levé soleil par jour
-        // for(let c = 0; c < 7; c++){
-        //     let unix_timestamp = resultatsAPI.daily[c + 1].sunset
-        //     // Create a new JavaScript Date object based on the timestamp
-        //     // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-        //     var date = new Date(unix_timestamp * 1000);
-        //     // Hours part from the timestamp
-        //     var hours = date.getHours();
-        //     // Minutes part from the timestamp
-        //     var minutes = "0" + date.getMinutes();
-    
-        //     // Will display time in 10:30:23 format
-        //     var formattedTime2 = hours + ':' + minutes.substr(-2);
-        //     coucheJoursDiv[c].innerText =  formattedTime2
-        // }
+        
 
 
         // // Humidité par jour
@@ -127,22 +136,44 @@ function AppelAPI(long, lat) {
 
 }
 
-const joursSemaine = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+function getDays() {
+    jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1);
+    
+    let tabJoursEnOrdre = daysWeek.slice(daysWeek.indexOf(jourActuel)).concat(daysWeek.slice(0, daysWeek.indexOf(jourActuel)));
+
+    return tabJoursEnOrdre
+    
+}
+if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+
+        // console.log(position);
+        let long = position.coords.longitude;
+        let lat = position.coords.latitude;
+        AppelAPI(long,lat);
+
+    }, () => {
+        alert(`You refused geolocation, the application cannot work, please activate it.`)
+    })
+}
 
 let ajd = new Date();
 let options = {weekday: 'long'};
 let jourActuel = ajd.toLocaleDateString('fr-FR', options);
 // console.log(jourActuel, ajd);
 
-jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1);
 
-let tabJoursEnOrdre = joursSemaine.slice(joursSemaine.indexOf(jourActuel)).concat(joursSemaine.slice(0, joursSemaine.indexOf(jourActuel)));
-// console.log(tabJoursEnOrdre);
-
-fetch(`http://api.airvisual.com/v2/nearest_city?key=e84938b6-92b7-4e22-a26c-7d6f95160eff`)
+fetch(`http://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        console.log(data.data);
+
+        getAqius(data.data.current.pollution.aqius)
+
+        atmosToInsert.innerText = data.data.current.weather.pr
+        windToInsert.innerText = data.data.current.weather.ws
+        windDirectionToInsert.innerText = data.data.current.weather.wd
+
 
 });

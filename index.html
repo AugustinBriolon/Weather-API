@@ -18,8 +18,8 @@
 </head>
 
 <body>
-    
-    <section class="weatherWeekly">
+
+    <header>
 
         <div class="dailyInfo">
 
@@ -29,143 +29,204 @@
 
         </div>
 
+    </header>
+    
+    <div class="containerP">
 
-        <div class="weeklyInfo">
+        <section class="weatherWeekly">
 
-            <div class="daysWeather">
+            <div class="weeklyInfo">
 
-                <p class="dayWeatherName">Sun</p>
-                <p class="dayWeatherTemp">21</p>
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Sun</p>
+                    <p class="dayWeatherTemp">21</p>
+
+                </div>
+
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Mon</p>
+                    <p class="dayWeatherTemp">17</p>
+
+                </div>
+
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Tue</p>
+                    <p class="dayWeatherTemp">20</p>
+
+                </div>
+
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Wed</p>
+                    <p class="dayWeatherTemp">29</p>
+
+                </div>
+
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Thu</p>
+                    <p class="dayWeatherTemp">22</p>
+
+                </div>
+
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Fri</p>
+                    <p class="dayWeatherTemp">16</p>
+
+                </div>
+
+                <div class="daysWeather">
+
+                    <p class="dayWeatherName">Sat</p>
+                    <p class="dayWeatherTemp">15</p>
+
+                </div>
 
             </div>
+            
+            <section class="extraInfo">
 
-            <div class="daysWeather">
+                <div class="airQuality">
 
-                <p class="dayWeatherName">Mon</p>
-                <p class="dayWeatherTemp">17</p>
+                    <h3>Air Quality</h3>
 
-            </div>
+                    <div class="aqiusContainer">
 
-            <div class="daysWeather">
+                        <p class="aqiusComment">Good</p>
+                        <p class="aqius">80</p>
+                        
+                    </div>
 
-                <p class="dayWeatherName">Tue</p>
-                <p class="dayWeatherTemp">20</p>
+                    <div class="infosContainer">
 
-            </div>
+                        <div class="atomContainer">
 
-            <div class="daysWeather">
+                            <p class="atmos">21</p>
+                            <p class="infoUnit"><abbr title="Atmospheric Pressure in hPa">PR</abbr></p>
 
-                <p class="dayWeatherName">Wed</p>
-                <p class="dayWeatherTemp">29</p>
+                        </div>
 
-            </div>
+                        <div class="windContainer">
 
-            <div class="daysWeather">
+                            <p class="wind">25</p>
+                            <p class="infoUnit"><abbr title="Wind Seed (m/s)">WS</abbr></p>
 
-                <p class="dayWeatherName">Thu</p>
-                <p class="dayWeatherTemp">22</p>
+                        </div>
 
-            </div>
+                        <div class="windDirectionContainer">
 
-            <div class="daysWeather">
+                            <p class="windDirection">25</p>
+                            <p class="infoUnit"><abbr title="Wind Direction, as an angle of 360°">WD</abbr></p>
 
-                <p class="dayWeatherName">Fri</p>
-                <p class="dayWeatherTemp">16</p>
+                        </div>
 
-            </div>
 
-            <div class="daysWeather">
+                    </div>
 
-                <p class="dayWeatherName">Sat</p>
-                <p class="dayWeatherTemp">15</p>
+                </div>
 
-            </div>
+                <div class="dontknow"></div>
 
-        </div>
-        
-        <section class="extraInfo">
+                <div class="sunCycle">
 
-            <div class="airQuality"></div>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    <p class="leveJoursDiv"></p>
+                    <p class="coucheJoursDiv"></p>
+                    
+                </div>
 
-            <div class="dontknow"></div>
-
-            <div class="sunCycle"></div>
+            </section>
 
         </section>
 
-    </section>
+        <section class="weatherDaily">
 
-    <section class="weatherDaily">
+            <div class="tempDaily">
 
-        <div class="tempDaily">
+                <img src="./assets/img/jour/01d.svg" alt="logo du temps qu'il fait" class="weatherLogo">
+                <p class="localisation"></p>
+                <p class="currentTemp"></p>
+                <p class="weather"></p>
 
-            <img src="./assets/img/jour/01d.svg" alt="logo du temps qu'il fait" class="weatherLogo">
-            <p class="localisation"></p>
-            <p class="currentTemp"></p>
-            <p class="weather"></p>
-
-        </div>
-
-
-        <div class="infosDaily">
-
-            <div class="blocTime">
-
-                <p class="timeName"></p>
-                <p class="timeValue"></p>
-                
             </div>
 
-            <span class="verticaLine"></span>
 
-            <div class="blocTime">
+            <div class="infosDaily">
 
-                <p class="timeName"></p>
-                <p class="timeValue"></p>
+                <div class="blocTime">
+
+                    <p class="timeName"></p>
+                    <p class="timeValue"></p>
+                    
+                </div>
+
+                <span class="verticaLine"></span>
+
+                <div class="blocTime">
+
+                    <p class="timeName"></p>
+                    <p class="timeValue"></p>
+                    
+                </div>
+
+                <span class="verticaLine"></span>
+
+                <div class="blocTime">
+
+                    <p class="timeName"></p>
+                    <p class="timeValue"></p>
+                    
+                </div>
+
+                <span class="verticaLine"></span>
+
+                <div class="blocTime">
+
+                    <p class="timeName"></p>
+                    <p class="timeValue"></p>
+                    
+                </div>
+
+                <span class="verticaLine"></span>
+
+                <div class="blocTime">
+
+                    <p class="timeName"></p>
+                    <p class="timeValue"></p>
+                    
+                </div>
+
+                <span class="verticaLine"></span>
+
+                <div class="blocTime">
+
+                    <p class="timeName"></p>
+                    <p class="timeValue"></p>
+                    
+                </div>
+
                 
+
             </div>
 
-            <span class="verticaLine"></span>
+        </section>
 
-            <div class="blocTime">
-
-                <p class="timeName"></p>
-                <p class="timeValue"></p>
-                
-            </div>
-
-            <span class="verticaLine"></span>
-
-            <div class="blocTime">
-
-                <p class="timeName"></p>
-                <p class="timeValue"></p>
-                
-            </div>
-
-            <span class="verticaLine"></span>
-
-            <div class="blocTime">
-
-                <p class="timeName"></p>
-                <p class="timeValue"></p>
-                
-            </div>
-
-            <span class="verticaLine"></span>
-
-            <div class="blocTime">
-
-                <p class="timeName"></p>
-                <p class="timeValue"></p>
-                
-            </div>
-
-            
-
-        </div>
-
-    </section>
+    </div>
 
     <script src="assets/script/app.js"></script>
 </body>
