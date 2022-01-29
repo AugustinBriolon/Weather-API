@@ -1,7 +1,19 @@
 const ApiKey = '8e9391f167c17b3253b145b2a036ffd4';
 const ApiKey2 = '87f51655-9722-4c30-ad92-4c0b5b08f29e'
 let resultatsAPI;
-let formattedTime
+let formattedTime;
+let date1 = new Date();
+let dateLocale = date1.toLocaleString('en-EN',{
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+});
+let timeForHello = date1.getHours();
+
+const dateTime = document.querySelector('.currentlyTime');
+const dateDate = document.querySelector('.currentlyDate');
+const helloDate = document.querySelector('.helloDay');
 
 const weather = document.querySelector('.weather');
 const currentTemp = document.querySelector('.currentTemp');
@@ -11,11 +23,9 @@ const tempJoursDiv = document.querySelectorAll('.dayWeatherTemp');
 const time = document.querySelectorAll('.timeName');
 const tempPourH = document.querySelectorAll('.timeValue');
 
-const humiJoursDiv = document.querySelectorAll('.jour-prevision-himi');
-const leveJoursDiv = document.querySelectorAll('.leveJoursDiv');
-const coucheJoursDiv = document.querySelectorAll('.coucheJoursDiv');
+const leveJoursDiv = document.querySelectorAll('.sunSetDiv');
+const coucheJoursDiv = document.querySelectorAll('.sunShineDiv');
 const weatherLogo = document.querySelector('.weatherLogo');
-
 
 const aqiusCommentToInsert = document.querySelector('.aqiusComment')
 const aqiusToInsert = document.querySelector('.aqius')
@@ -23,10 +33,29 @@ const atmosToInsert = document.querySelector('.atmos')
 const windToInsert = document.querySelector('.wind')
 const windDirectionToInsert = document.querySelector('.windDirection')
 
+const humidityCommentToInsert = document.querySelector('.humidityComment')
+const humidityToInsert = document.querySelector('.humi')
 
 const daysWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
+
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    // console.log(hours);
+    hours = hours % 12;
+    // console.log(hours);
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    // console.log(hours);
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    // console.log(hours);
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
+// console.log(formatAMPM(new Date));
 
 function convertUnix(unix) {
     let unix_timestamp = unix
@@ -40,8 +69,8 @@ function convertUnix(unix) {
 
     // Will display time in 10:30:23 format
     formattedTime = hours + ':' + minutes.substr(-2);
-
 }
+
 function getAqius(aqius) {
     aqiusToInsert.innerText = aqius
     if (aqius >= 0 && aqius <= 50) {
@@ -59,6 +88,32 @@ function getAqius(aqius) {
     }
 }
 
+function getHumi(humidity) {
+    humidityToInsert.innerText = humidity
+    if (humidity >= 0 && humidity <= 33) {
+        humidityCommentToInsert.innerText = 'Very Dry'
+    } else if (humidity > 33 && humidity <= 50) {
+        humidityCommentToInsert.innerText = 'Dry'
+    } else if (humidity > 50 && humidity <= 75) {
+        humidityCommentToInsert.innerText = 'Damp'
+    } else if (humidity > 75 && humidity <= 85) {
+        humidityCommentToInsert.innerText = 'Humid'
+    } else if (humidity > 85) {
+        humidityCommentToInsert.innerText = 'Very Humid'
+    }
+}
+
+
+
+function getDays() {
+    jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1);
+    
+    let tabJoursEnOrdre = daysWeek.slice(daysWeek.indexOf(jourActuel)).concat(daysWeek.slice(0, daysWeek.indexOf(jourActuel)));
+
+    return tabJoursEnOrdre
+    
+}
+
 function AppelAPI(long, lat) {
 
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&units=imperial&appid=${ApiKey}`)
@@ -69,10 +124,11 @@ function AppelAPI(long, lat) {
 
         resultatsAPI = data;
 
+
+
         weather.innerText = resultatsAPI.current.weather[0].description;
         currentTemp.innerText = `${Math.trunc(resultatsAPI.current.temp)}°F`
         localisation.innerText = resultatsAPI.timezone;
-
 
         // les times, par tranche de trois, avec leur temperature.
 
@@ -107,6 +163,10 @@ function AppelAPI(long, lat) {
             tempJoursDiv[m].innerText = `${Math.floor(resultatsAPI.daily[m + 1].temp.day)}°F`
         }
 
+        sunShine = resultatsAPI.daily.sunset
+        sunRise = resultatsAPI.daily.sunrise
+
+
         for(let l = 0; l < 7; l++){
             convertUnix(resultatsAPI.daily[l + 1].sunrise)
             leveJoursDiv[l].innerText = formattedTime
@@ -116,16 +176,9 @@ function AppelAPI(long, lat) {
             coucheJoursDiv[l].innerText = formattedTime
         }
 
-        
-
-
-        // // Humidité par jour
-        // for(let h = 0; h < 7; h++){
-        //     humiJoursDiv[h].innerText = resultatsAPI.daily[h + 1].humidity
-        // }
 
         // Icone dynamique 
-        if(timeActuelle >= 9 && timeActuelle < 18) {
+        if(timeActuelle >= 8 && timeActuelle < 18) {
             weatherLogo.src = `assets/img/jour/${resultatsAPI.current.weather[0].icon}.svg`
         } else  {
             weatherLogo.src = `assets/img/nuit/${resultatsAPI.current.weather[0].icon}.svg`
@@ -136,15 +189,37 @@ function AppelAPI(long, lat) {
 
 }
 
+fetch(`http://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
+    .then(response => response.json())
+    .then(data => {
 
-function getDays() {
-    jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1);
-    
-    let tabJoursEnOrdre = daysWeek.slice(daysWeek.indexOf(jourActuel)).concat(daysWeek.slice(0, daysWeek.indexOf(jourActuel)));
+        getAqius(data.data.current.pollution.aqius)
+        getHumi(data.data.current.weather.hu)
+        
+        atmosToInsert.innerText = data.data.current.weather.pr
+        windToInsert.innerText = data.data.current.weather.ws
+        windDirectionToInsert.innerText = data.data.current.weather.wd
+        
+        
+});
 
-    return tabJoursEnOrdre
-    
-}
+
+dateTime.innerText = formatAMPM(new Date)
+dateDate.innerText = dateLocale
+
+
+today = new Date() 
+
+if(today.getHours() >= 6 && today.getHours() < 11) {      
+    helloDate.innerText = 'Good Morning'; 
+} else if (today.getHours() >= 12 && today.getHours() < 17){     
+    helloDate.innerText = 'Good Afternoon'; 
+} else if (today.getHours() >= 18 && today.getHours() < 6){     
+    helloDate.innerText = 'Good Evening'; 
+} 
+
+
+
 if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
 
@@ -164,16 +239,3 @@ let jourActuel = ajd.toLocaleDateString('fr-FR', options);
 // console.log(jourActuel, ajd);
 
 
-fetch(`http://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.data);
-
-        getAqius(data.data.current.pollution.aqius)
-
-        atmosToInsert.innerText = data.data.current.weather.pr
-        windToInsert.innerText = data.data.current.weather.ws
-        windDirectionToInsert.innerText = data.data.current.weather.wd
-
-
-});

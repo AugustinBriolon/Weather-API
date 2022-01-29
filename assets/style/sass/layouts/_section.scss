@@ -1,7 +1,8 @@
 /* First Section
 --------------------------------------------- */
 header {
-    width: 65vw;
+    grid-area: 1/1/2/2;
+    @include size(65vw, fit-content);
     display: block;
     padding: 2%;
     @media screen and (max-width : 500px) {
@@ -35,18 +36,23 @@ header {
 }
 
 .containerP {
-    display: flex;
-    flex-direction: row;
-    @media screen and (max-width : 1000px) {
-        flex-direction: column-reverse;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(50%, 2);
+    @media screen and (max-width : 500px) {
+        grid-template-columns: 1fr;
     }
 }
 
 .weatherWeekly {
-    @include size(65vw, 100vh);
+    width: 65vw;
+    grid-area: 2/1/3/2;
     padding: 2%;
     @media screen and (max-width : 1000px) {
         @include size(100vw, fit-content);
+    }
+    @media screen and (max-width : 500px) {
+        grid-area: 3/1/4/2;
     }
 
     .weeklyInfo {
@@ -75,34 +81,25 @@ header {
             font-size: $fontText;
             background-color: $colorBg2;
             border-radius: 23px;
-            box-shadow:  8px 0px 30px #c7c7c7;
+            box-shadow: 4px 4px 20px #00000009;
             @media screen and (max-width : 500px) {
-                box-shadow: none;
+                height: 150px;
             }
         }
     }
 
     .extraInfo {
-        @include size(65vw, 100%);
         margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         @media screen and (max-width : 500px) {
             @include size(100%, 100%);
+            flex-direction: column;
         }
 
         .airQuality {
-            @include size(30vw, 40%);
-            background-color: $colorBg2;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            @media screen and (max-width : 500px) {
-                @include size(100%, 40%);
-            }
-
-            h3 {
-                font-size: $fontHead2;
-            }
+            @include size(30vw, fit-content);
 
             .aqiusContainer {
                 @include size(100%, fit-content);
@@ -116,6 +113,76 @@ header {
             }
         }
 
+        .humidity {
+            @include size(30vw, fit-content);
+            @media screen and (max-width : 500px) {
+                margin-top: 20px;
+            }
+
+            .humidityContainer {
+                @include size(100%, fit-content);
+                display: flex;
+                color: $colorPrimary;
+                font-size: $fontText;
+
+                .humi {
+                    padding-left: 20%;
+                }
+            }
+        }
+
+        .sunCycle {
+            @include size(65vw, fit-content);
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            font-size: $fontText;
+            font-weight: 300;
+            
+            .sunInfos {
+                display: flex;
+                justify-content: space-between;
+                color: transparent;
+                background-clip: text;
+                -webkit-background-clip: text;
+                background-image: linear-gradient(#e4e14f, #ff7e7e);
+                
+                .sun {
+                    display: flex;
+                    flex-direction: column;  
+                    
+                    // .sunSetDiv {
+                    //     color: $colorSunSet;
+                    // }
+
+                    // .sunShineDiv {
+                    //     color: $colorSunShine;
+                    // }
+                }
+            }
+        }
+
+        .humidity,
+        .sunCycle,
+        .airQuality {
+            background-color: $colorBg2;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 4px 20px #00000009;
+            padding: 30px;
+            @media screen and (max-width : 500px) {
+                @include size(100%, 40%);
+            }
+
+
+            h3 {
+                font-size: $fontHead2;
+            }
+        }
+
+
+
         .infosContainer {
             display: flex;
             flex-direction: row;
@@ -123,7 +190,7 @@ header {
             .atomContainer,
             .windContainer,
             .windDirectionContainer {
-                @include size(18%, fit-content);
+                @include size(22%, fit-content);
                 background-color: $colorAirDiv;
                 color: $colorAir;
                 display: flex;
@@ -153,7 +220,8 @@ header {
 }
 
 .weatherDaily {
-    @include size(35vw, 100%);
+    @include size(34vw, 100%);
+    grid-area: 1/2/4/3;
     padding: 2%;
     background-color: $colorBg2;
     display: flex;
@@ -163,18 +231,23 @@ header {
         @include size(100vw, fit-content);
         background-color: $colorBg;
     }
+    @media screen and (max-width : 500px) {
+        grid-area: 2/1/3/2;
+    }
+
 
     .tempDaily {
         @include size(100%, fit-content);
         color: $colorBg2;
         margin: 5%;
-        padding: 50px;
         display: grid;
         grid-template-columns: 1fr;
         justify-items: center;
         align-items: center;
-        background: $colorPrimary;
+        background: linear-gradient(0.10turn,#6a9dff, #3666c0);
         border-radius: 20px;
+        box-shadow: 4px 4px 20px #00000038;
+
         @media screen and (max-width : 500px) {
             padding: 0;
         }
@@ -194,6 +267,7 @@ header {
         }
 
         .weather {
+            text-transform: capitalize;
             margin-bottom: 0px;
             @media screen and (max-width : 500px) {
                 padding-bottom: 30px;
@@ -203,13 +277,14 @@ header {
     }
     
     .infosDaily {
-        @include size(100%, 20vh);
+        @include size(100%, fit-content);
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        background-color: $colorSecondary;
+        background: linear-gradient(0.10turn, #ff80af, #da4b7f);
         border-radius: 20px;
+        box-shadow: 4px 4px 20px #00000038;
 
         .blocTime {
             width: 100%;
@@ -230,8 +305,9 @@ header {
 
         .verticaLine{
             border-left: 2px solid $colorBg2;
+            opacity: 0.4;
             display: inline-block;
-            height: calc(100px + 4vh);
+            height: 60%;
         }
     }
 }
