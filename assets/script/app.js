@@ -189,7 +189,7 @@ function AppelAPI(long, lat) {
 
 }
 
-fetch(`http://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
+fetch(`https://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
     .then(response => response.json())
     .then(data => {
 
@@ -221,7 +221,7 @@ if(today.getHours() >= 6 && today.getHours() < 11) {
 
 
 if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition((position) => {
 
         // console.log(position);
         let long = position.coords.longitude;
