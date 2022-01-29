@@ -1,7 +1,13 @@
-# Weather API
+# Weather API 
 
-For this project I use 2 differents API. [The OpenWeatheMap](https://openweathermap.org/api/one-call-api) and the [AirVisualAPI](https://api-docs.iqair.com/?version=latest#detailed-response-example).
+## Introduction
 
-### Here's the link : https://weather.august1.dev/
+Here's a website of the weather which depend on your localisation [Weather](https://weather.august1.dev)
+> Don't forget to allow your localisation
 
-Don't forget to allow localisation.
+## Code Samples
+
+The code is separate in 3 parts :
+*  HTML : use to create the structure of my page.
+* SCSS : an optimized version of CSS to make a better structure of code.
+* JavaScript : use to get API informations and put it in the HTML 
