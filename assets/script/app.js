@@ -189,20 +189,6 @@ function AppelAPI(long, lat) {
 
 }
 
-fetch(`https://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
-    .then(response => response.json())
-    .then(data => {
-
-        getAqius(data.data.current.pollution.aqius)
-        getHumi(data.data.current.weather.hu)
-        
-        atmosToInsert.innerText = data.data.current.weather.pr
-        windToInsert.innerText = data.data.current.weather.ws
-        windDirectionToInsert.innerText = data.data.current.weather.wd
-        
-        
-});
-
 
 dateTime.innerText = formatAMPM(new Date)
 dateDate.innerText = dateLocale
@@ -227,6 +213,19 @@ if(navigator.geolocation) {
         let long = position.coords.longitude;
         let lat = position.coords.latitude;
         AppelAPI(long,lat);
+
+        fetch(`https://api.airvisual.com/v2/nearest_city?key=${ApiKey2}`)
+            .then(response => response.json())
+            .then(data => {
+
+                getAqius(data.data.current.pollution.aqius)
+                getHumi(data.data.current.weather.hu)
+                
+                atmosToInsert.innerText = data.data.current.weather.pr
+                windToInsert.innerText = data.data.current.weather.ws
+                windDirectionToInsert.innerText = data.data.current.weather.wd
+
+});
 
     }, () => {
         alert(`You refused geolocation, the application cannot work, please activate it.`)

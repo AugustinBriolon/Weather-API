@@ -231,9 +231,19 @@ header .dailyInfo .helloDay {
   -webkit-background-clip: text;
   background-image: linear-gradient(#e4e14f, #ff7e7e);
 }
+@media screen and (max-width: 500px) {
+  .weatherWeekly .extraInfo .sunCycle .sunInfos {
+    flex-wrap: wrap;
+  }
+}
 .weatherWeekly .extraInfo .sunCycle .sunInfos .sun {
   display: flex;
   flex-direction: column;
+}
+@media screen and (max-width: 500px) {
+  .weatherWeekly .extraInfo .sunCycle .sunInfos .sun {
+    margin: 20px;
+  }
 }
 .weatherWeekly .extraInfo .humidity,
 .weatherWeekly .extraInfo .sunCycle,

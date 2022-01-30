@@ -140,6 +140,7 @@ header {
             flex-direction: column;
             font-size: $fontText;
             font-weight: 300;
+
             
             .sunInfos {
                 display: flex;
@@ -148,10 +149,16 @@ header {
                 background-clip: text;
                 -webkit-background-clip: text;
                 background-image: linear-gradient(#e4e14f, #ff7e7e);
+                @media screen and (max-width : 500px) {
+                    flex-wrap: wrap;
+                }
                 
                 .sun {
                     display: flex;
                     flex-direction: column;  
+                    @media screen and (max-width : 500px) {
+                        margin: 20px;
+                    }
                     
                     // .sunSetDiv {
                     //     color: $colorSunSet;
