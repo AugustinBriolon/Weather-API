@@ -234,6 +234,7 @@ header .dailyInfo .helloDay {
 @media screen and (max-width: 500px) {
   .weatherWeekly .extraInfo .sunCycle .sunInfos {
     flex-wrap: wrap;
+    z-index: 999;
   }
 }
 .weatherWeekly .extraInfo .sunCycle .sunInfos .sun {

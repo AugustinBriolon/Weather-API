@@ -151,6 +151,7 @@ header {
                 background-image: linear-gradient(#e4e14f, #ff7e7e);
                 @media screen and (max-width : 500px) {
                     flex-wrap: wrap;
+                    z-index: 999;
                 }
                 
                 .sun {
